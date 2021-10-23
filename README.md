@@ -1,18 +1,50 @@
 # AngularMfeExample
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.6.
+This project was achieved based on this article: https://dev.to/sbhuvane/micro-frontend-in-angular-using-module-federation-31om
 
-## Development server
+## Pre-Requisites:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+    1.Angular CLI: 11.2.8
+    2.Node: 15.4.0
+    3.Yarn: 1.22.10
 
-## Code scaffolding
+We will be using yarn as package manager instead of NPM. Why? We will be using Webpack 5 Module Federation with Angular 11. Angular CLI 11 uses webpack version 4. We will be overriding the webpack version in package.json and yarn is required to override the web pack version for angular cli.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Set Yarn as package manager usinr `ng config cli.packageManager yarn `
 
-## Build
+## Create Workspace
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `ng new angular-mfe-example --createApplication="false"`
+
+The above command will create a workspace with no projects.
+
+## Create Host Application
+
+1.Run `ng g applicatie host --routing --style=css`
+
+The above command will create a host application.
+
+2.Run `ng g c home --project=host` to generate a new home component inside our host application.
+
+3.Add a Route to app-routing.module.ts for HomeComponent :
+
+```
+{
+    path: '',
+    component: HomeComponent,
+    pathMatch: 'full',
+  },
+
+```
+
+4.Add router-outlet to app.component.html :
+
+```
+<h1>HOST</h1>
+<router-outlet></router-outlet>
+```
+
+5.Run the application `ng serve host`
 
 ## Running unit tests
 
